@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  rabbit-mq:
+    container_name: rabbitmq-mon
+    hostname: "rabbitmq"
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - rabbit-mq-data:/var/lib/rabbitmq/mnesia/
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+      - RABBITMQ_DEFAULT_VHOST=/
+
+volumes:
+  rabbit-mq-data:

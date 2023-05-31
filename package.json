@@ -1,0 +1,35 @@
+{
+  "name": "rabbit-mq-monitor",
+  "version": "1.0.0",
+  "description": "a service that connects to your rabbit-mq instance and monitors its queues performance to alert you if certain events happen ",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && NODE_ENV=development node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hawi19952/Rabbit-mq-ts-monitor.git"
+  },
+  "keywords": [
+    "rabbit-mq",
+    "monitor",
+    "microservices",
+    "typescript",
+    "javascript",
+    "amqp",
+    "amqplib"
+  ],
+  "author": "Hawi1995",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hawi19952/Rabbit-mq-ts-monitor/issues"
+  },
+  "homepage": "https://github.com/hawi19952/Rabbit-mq-ts-monitor#readme",
+  "dependencies": {
+    "amqplib": "^0.10.3"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.1"
+  }
+}
