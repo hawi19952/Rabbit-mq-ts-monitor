@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/hawi19952/Rabbit-mq-ts-monitor#readme",
   "dependencies": {
-    "amqplib": "^0.10.3"
+    "amqplib": "^0.10.3",
+    "dotenv": "^16.1.1"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.1"
