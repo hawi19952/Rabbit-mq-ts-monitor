@@ -83,6 +83,3 @@ async function main() {
 }
 
 main();
-
-//TODO: Set comparison method between each 2 readings  -> store readings in fs for now 
-//TODO: Set a notification helper to notify another service of the action -> Slack for now 
