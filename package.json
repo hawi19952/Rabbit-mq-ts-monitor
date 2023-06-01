@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/hawi19952/Rabbit-mq-ts-monitor#readme",
   "dependencies": {
+    "@slack/webhook": "^6.1.0",
     "amqplib": "^0.10.3",
     "dotenv": "^16.1.1"
   },
