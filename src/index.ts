@@ -1,7 +1,8 @@
 console.log('hello world');
 import { Channel, connect, Options } from 'amqplib'
-import { RABBITMQ_HOST, RABBITMQ_PASS, RABBITMQ_USER, RABBITMQ_VHOST, RABBITMQ_PORT, COMMA_SEPERATED_QUEUE_NAMES } from './env';
+import { RABBITMQ_HOST, RABBITMQ_PASS, RABBITMQ_USER, RABBITMQ_VHOST, RABBITMQ_PORT, COMMA_SEPERATED_QUEUE_NAMES, SLACK_USER_ID_FOR_MENTION } from './env';
 import { writeFileSync, readFileSync } from 'fs'
+import sendSlack from './send.to.slack';
 let ch: Channel;
 const queues: string[] | undefined = COMMA_SEPERATED_QUEUE_NAMES?.split(',');
 console.log('Watching the queues: ' + queues);
@@ -34,15 +35,20 @@ function getOldReadings() {
   return foundReadings
 }
 
-function compareNewWithOldReadings(oldReadings: Array<QueueStats>, newReadings: Array<QueueStats>) {
+async function compareNewWithOldReadings(oldReadings: Array<QueueStats>, newReadings: Array<QueueStats>) {
   newReadings.map(n => {
-    oldReadings.find(o => {
+    oldReadings.find(async o => {
       if (n.queue.includes(o.queue)) {
         if (n.messageCount > o.messageCount) {
           console.log(n.queue + ' Does not look to be progressing');
           if (n.consumerCount < 1) {
             console.log('No consumer is connected to ' + n.queue);
             //TODO: Fire a notification to slack
+            await sendSlack({
+              text: `No consumer is connected to ${n.queue} <@${SLACK_USER_ID_FOR_MENTION}>`,
+              to: 'productionErrors',
+              attachmentColor: 'danger',
+            })
           }
         }
       }

@@ -24,7 +24,7 @@ async function sendSlack ({ to, text, customId, link, attachmentsFields, attachm
     const webhook = getWebhook({ channelName: to });
     await webhook.send(webhookBody);
   } catch (err) {
-    reportError(err);
+    console.log(err);
   }
 
   function handleAttachments () {
